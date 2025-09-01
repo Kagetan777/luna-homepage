@@ -1,0 +1,122 @@
+:root{
+  --brand:#f5d77a;        /* lunar gold */
+  --brand-2:#ff4fd8;      /* neon pink accent */
+  --bg-deep:#0a0b14;      /* deep night */
+  --text-soft:#d6d8e5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins','Noto Sans JP',system-ui,-apple-system,'Segoe UI',Roboto,'Hiragino Kaku Gothic ProN','Yu Gothic UI','Noto Sans JP',sans-serif;background:var(--bg-deep);color:#fff}
+.glass{backdrop-filter:saturate(180%) blur(8px); background:rgba(10,11,20,.55); border-bottom:1px solid rgba(255,255,255,.08)}
+.section{scroll-margin-top:96px}
+.shadow-soft{box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.brand{letter-spacing:.2em}
+.brand em{color:var(--brand-2); font-style:normal}
+.btn-primary{background:var(--brand-2);}
+.btn-primary:hover{filter:brightness(1.1)}
+.badge-open{background:#16a34a}
+.badge-closed{background:#52525b}
+/* Hero overlay to enhance the moon visual */
+.hero-overlay{background:radial-gradient(1200px 500px at 60% 10%, rgba(255,255,255,.15), transparent 60%), linear-gradient(180deg, rgba(10,11,20,.0) 0%, rgba(10,11,20,.6) 60%, rgba(10,11,20,.9) 100%)}
+a, .link{color:var(--brand-2)}
+a:hover{opacity:.9}
+#heroImg { transition: opacity .8s ease; }
+.fade-out { opacity: 0; }
+
+/* じわっと拡大（Ken Burns風） */
+.kenburns {
+  animation: kb-zoom 7s ease-in-out forwards;
+  will-change: transform;
+}
+
+/* ズーム用キーフレーム：1.0 → 1.08（必要なら倍率調整してOK） */
+@keyframes kb-zoom {
+  0%   { transform: scale(1.0); }
+  100% { transform: scale(1.08); }
+}
+
+/* --- Brand subtitle --- */
+.brand-sub{ display:block; font-size:.72rem; color:var(--text-soft,#d6d8e5); letter-spacing:.15em; opacity:.9; margin-top:-2px }
+/* --- Hero controls & crossfade/Ken Burns --- */
+.hero-ctrl{ position:absolute; top:50%; transform:translateY(-50%); z-index:15; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.15);
+  padding:.5rem .6rem; border-radius:9999px; cursor:pointer; backdrop-filter: blur(4px); }
+.hero-ctrl:hover{ background:rgba(0,0,0,.5); }
+.hero-prev{ left:12px } .hero-next{ right:12px }
+.hero-dots{ position:absolute; z-index:15; left:50%; transform:translateX(-50%); bottom:18px; display:flex; gap:8px }
+.hero-dot{ width:9px; height:9px; border-radius:9999px; background:rgba(255,255,255,.35); cursor:pointer }
+.hero-dot.active{ background:var(--brand-2,#ff4fd8) }
+.hero-img{ transition: opacity .9s ease, transform 7s ease-in-out; will-change: opacity, transform; }
+.show{ opacity: .60 } .hide{ opacity: 0 }
+.kb-in{ transform: scale(1.08) translate3d(8px,-6px,0) } .kb-out{ transform: scale(1.0) translate3d(0,0,0) }
+.kb-left{ transform-origin: 20% 50% } .kb-right{ transform-origin: 80% 50% }
+/* --- Headline font & glow --- */
+.hero-title{ font-family:'Cinzel','Poppins','Noto Sans JP',sans-serif; text-shadow:0 2px 14px rgba(255,79,216,.35) }
+/* --- Reveal (Concept) --- */
+.reveal-left{ opacity:0; transform: translateX(-24px); transition: all .8s ease; }
+.reveal-left.is-visible{ opacity:1; transform: translateX(0); }
+/* --- Payment strip --- */
+.pay-strip{ display:flex; flex-wrap:wrap; gap:12px; align-items:center }
+.pay-title{ font-size:.9rem; color:#a3a3a3; margin-right:.4rem }
+
+/* 予約フォームをコンパクトに */
+.form-compact { row-gap: .6rem; column-gap: .8rem; }
+.form-compact label { margin-bottom: .25rem; font-size: .92rem; line-height: 1.2; }
+.form-compact input,
+.form-compact select,
+.form-compact textarea {
+  padding: .5rem .75rem;          /* = py-2 px-3 相当を少しだけ縮める */
+  line-height: 1.3;
+  min-height: 40px;               /* 指1本でも押しやすい最低高 */
+  border-radius: .75rem;
+}
+.form-compact textarea { min-height: 96px; } /* rows=3 の見た目を揃える */
+.form-compact .btn-primary { padding: .6rem 1rem; }
+
+/* セクション自体も少しだけ圧縮したい場合（任意） */
+#reserve.section { padding-top: 2.5rem; padding-bottom: 2.5rem; } /* py-16 → py-10 相当 */
+@media (min-width: 768px){
+  #reserve.section { padding-top: 3rem; padding-bottom: 3rem; }   /* md で少し余裕 */
+}
+/* --- 予約ボタンなど .btn-primary の文字色を白に固定 --- */
+.btn-primary,
+.btn-primary:link,
+.btn-primary:visited {
+  color: #fff !important;          /* 常に白文字 */
+}
+
+/* ボタン内のアイコン(SVG)も白に */
+.btn-primary svg {
+  color: #fff !important;
+  fill: currentColor !important;
+}
+
+/* ヘッダー/スマホメニューの「ご予約」も念のため白に */
+header a[href="#reserve"],
+#spNav a[href="#reserve"] {
+  color: #fff !important;
+}
+
+/* ハンバーガーの見やすさ */
+#navOpen { color:#fff; }
+#navOpen svg path { stroke: currentColor; stroke-width:2; stroke-linecap:round; fill:none; }
+@media (max-width: 767px){
+  header{ position: sticky; top:0; z-index:70; }
+  /* spNavはヘッダー直下に“重ねて”表示（hiddenを外すだけで出る） */
+  #spNav{
+    position: absolute; left:0; right:0; top:100%;
+    z-index:65;
+    background: rgba(10,11,20,.95);
+    backdrop-filter: saturate(180%) blur(8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  #spNav a{ padding:.9rem .75rem; font-size:1rem; }
+}
+/* オーバーレイがクリックを奪わないように */
+.hero-overlay,.global-overlay,.site-mask{ pointer-events:none; z-index:0; }
+/* 予約ボタンは白文字固定 */
+.btn-primary, .btn-primary:link, .btn-primary:visited { color:#fff !important; }
+#spNav.hidden{ display:none !important; }  /* Tailwindが効かない環境でも隠れる保険 */
+/* Facebook埋め込みの親セクション内で中央寄せ（任意） */
+#cast .fb-page{
+  max-width: 800px;   /* 好みで 500–900px */
+  margin-inline: auto;
+}

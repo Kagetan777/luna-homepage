@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUNA Lounge｜尼崎のフィリピンパブ</title>
+  <meta name="description" content="兵庫・尼崎のフィリピンパブ LUNA Lounge。初めての方歓迎、飲み放題プランあり。月夜のような雰囲気でカラオケも会話も気軽に。" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Fonts & Tailwind CDN -->
+   <link rel="icon" href="img/luna-hero.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BarOrPub","name":"LUNA Lounge",
+    "address":{
+      "@type":"PostalAddress",
+      "addressCountry":"JP",
+      "addressRegion":"兵庫県",
+      "addressLocality":"尼崎市",
+      "streetAddress":"神田北通2-22-4 (660-0883)"
+    },
+    "telephone":"080-2500-3004",
+    "openingHours":["Mo-Su 20:00-01:00"],
+    "priceRange":"¥¥¥",
+    "servesCuisine":["Filipino","Bar"],
+    "sameAs":["https://instagram.com/yourshop"],
+    "image":"/img/og.jpg"
+  }
+  </script>
+</head>
+<body class="bg-neutral-950 text-white">
+   <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v23.0"></script>
+  <!-- ここから既存のヘッダーなど -->
+  <!-- 年齢確認（20歳以上） -->
+  <div id="ageGate" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+    <div class="w-[92%] max-w-xl rounded-2xl bg-neutral-900 p-6 text-center shadow-soft">
+      <h2 class="mb-3 text-2xl font-bold">年齢確認</h2>
+      <p class="mb-6 text-neutral-300">このサイトはお酒に関する情報を含みます。<br>日本の法令により、<span class="font-semibold text-[var(--brand-2)]">20歳未満の方はご入場いただけません</span>。</p>
+      <div class="grid grid-cols-2 gap-3">
+        <button id="btnUnder" class="rounded-xl border border-neutral-700 px-5 py-3 hover:bg-neutral-800">いいえ（退場）</button>
+        <button id="btnOver" class="rounded-xl btn-primary px-5 py-3 font-semibold hover:opacity-95">はい、20歳以上です</button>
+      </div>
+      <p class="mt-4 text-xs text-neutral-400">※Cookieに保存し、30日間は表示されません。</p>
+    </div>
+  </div>
+
+  <!-- ヘッダー -->
+  <header class="sticky top-0 z-40 glass">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <a href="#top" class="flex items-center gap-2">
+      <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-pink-600 font-bold">LL</span>
+      <span class="text-lg font-semibold brand leading-5">
+        LUNA <em>Lounge</em><span class="brand-sub">Philippines</span>
+      </span>
+    </a>
+
+    <!-- PCナビ -->
+    <nav class="hidden items-center gap-6 md:flex">
+      <a class="hover:text-[var(--brand-2)]" href="#concept">Concept</a>
+      <a class="hover:text-[var(--brand-2)]" href="#system">System</a>
+      <a class="hover:text-[var(--brand-2)]" href="#cast">SNS</a>
+      <a class="hover:text-[var(--brand-2)]" href="#menu">Menu</a>
+      <a class="hover:text-[var(--brand-2)]" href="#gallery">Gallery</a>
+      <a class="hover:text-[var(--brand-2)]" href="#access">Access</a>
+      <a class="rounded-xl btn-primary px-4 py-2 font-semibold hover:opacity-95" href="#reserve">Webご予約</a>
+      <a href="tel:07022862224"
+     class="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 font-semibold ring-1 ring-white/15 hover:bg-white/20"
+     aria-label="電話で予約 070-2286-2224">
+    <span aria-hidden="true">📞</span> 電話で予約
+  </a>
+    </nav>
+
+    <!-- ハンバーガー（type="button"が重要） -->
+    <button id="navOpen" type="button" class="md:hidden" aria-label="メニュー">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- スマホメニュー（初期は hidden。開閉はJSでこのhiddenを付け外し） -->
+  <div id="spNav" class="hidden border-t border-white/10 bg-neutral-900 md:hidden">
+    <div class="mx-auto grid max-w-6xl gap-1 px-4 py-3">
+      <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#concept">Concept</a>
+      <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#system">System</a>
+      <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#cast">SNS</a>
+      <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#menu">Menu</a>
+      <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#gallery">Gallery</a>
+      <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#access">Access</a>
+      <a class="rounded-lg btn-primary px-2 py-2 font-semibold hover:opacity-95" href="#reserve">Webご予約</a>
+      <a href="tel:07022862224" class="rounded-lg px-2 py-2 hover:bg-neutral-800 flex items-center gap-2"
+         aria-label="電話で予約 070-2286-2224">📞 電話で予約（070-2286-2224）</a>
+    </div>
+  </div>
+</header>
+
+
+  <!-- ヒーロー -->
+  
+  <!-- ヒーロー（2レイヤー：クロスフェード＋Ken Burns＋操作） -->
+  <section id="top" class="relative min-h-[78vh] overflow-hidden">
+    <img id="heroA" src="img/kanban.jpg" alt="Lounge" class="hero-img absolute inset-0 h-full w-full object-cover show"/>
+    <img id="heroB" src="img/a.jpg" alt="Lounge" class="hero-img absolute inset-0 h-full w-full object-cover hide"/>
+    <img id="heroC" src="img/tennai.jpg" alt="Lounge" class="hero-img absolute inset-0 h-full w-full object-cover show"/>
+    <div class="absolute inset-0 hero-overlay"></div>
+    <button class="hero-ctrl hero-prev" aria-label="前へ">&#10094;</button>
+    <button class="hero-ctrl hero-next" aria-label="次へ">&#10095;</button>
+    <div class="hero-dots" id="heroDots"></div>
+    <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-28">
+      <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm">尼崎・阪神尼崎｜20:00-翌1:00 <span id="openNow" class="ml-2 rounded-full px-2 py-0.5 text-xs"></span></span>
+      <h1 id="heroTitle" class="hero-title text-4xl font-extrabold leading-tight md:text-6xl">月のきらめきと<br class="hidden sm:block"/>フィリピンの笑顔に酔いしれる。</h1>
+    </div>
+  </section>
+
+
+  <!-- Concept -->
+  <section id="concept" class="section mx-auto max-w-6xl px-4 py-16">
+    <div class="grid items-center gap-8 md:grid-cols-2">
+      <div>
+        <h2 class="mb-3 text-3xl font-bold reveal-left">Concept / コンセプト</h2>
+        <p class="mb-4 text-neutral-300">フィリピンの陽気な音楽とホスピタリティをそのままに。お一人様でも団体様でも、ゆったり過ごせる空間をご用意しています。日本語・英語が話せるスタッフが、初めての方も丁寧にご案内。</p>
+        <ul class="grid gap-2 text-neutral-300">
+          <li>・セット料金は明朗会計／カードOK</li>
+          <li>・歌い放題カラオケ／貸切可（ご相談ください）</li>
+          <li>・ポールダンスを踊れるキャストも！</li>
+        </ul>
+      </div>
+      <img class="w-full rounded-2xl object-cover shadow-soft" src="img/a.jpg" alt="Store"/>
+    </div>
+  </section>
+
+  <!-- System -->
+  <section id="system" class="section bg-neutral-900/60 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-6 text-3xl font-bold">System / 料金</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl bg-neutral-900 p-6 shadow-soft">
+          <h3 class="mb-2 text-xl font-semibold">飲み放題1時間</h3>
+          <p class="mb-4 text-neutral-300">ジュース・ウイスキー・焼酎付き</p>
+          <p class="text-3xl font-extrabold">4,000<span class="ml-1 text-sm font-medium text-neutral-400">税込</span></p>
+        </div>
+        <div class="rounded-2xl bg-neutral-900 p-6 shadow-soft">
+          <h3 class="mb-2 text-xl font-semibold">飲み放題2時間</h3>
+          <p class="mb-4 text-neutral-300">同プラン</p>
+          <p class="text-3xl font-extrabold">6,000<span class="ml-1 text-sm font-medium text-neutral-400">税込</span></p>
+        </div>
+        <div class="rounded-2xl bg-neutral-900 p-6 shadow-soft">
+          <h3 class="mb-2 text-xl font-semibold">ボトルキープのお客様は</h3>
+          <p class="mb-4 text-neutral-300">2時間無料</p>
+          <p class="text-3xl font-extrabold">5,000<span class="ml-1 text-sm font-medium text-neutral-400">税込</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- SNS（Facebookのみ／タイムライン）-->
+<!-- SNS（Facebookのみ／タイムライン）-->
+<!-- SNS / Facebookタイムライン -->
+<section id="cast" class="section mx-auto max-w-6xl px-4 py-16">
+  <h2 class="mb-6 text-3xl font-bold">SNS / 情報</h2>
+  <p class="mb-4 text-neutral-300">最新の情報、イベントはこちらで表示されます。</p>
+  <!-- 幅は親の幅に自動フィット（data-adapt-container-width=true） -->
+  <div class="fb-page"
+       data-href="https://www.facebook.com/facebook"
+       data-tabs="timeline"
+       data-width=""
+       data-height=""
+       data-small-header="false"
+       data-adapt-container-width="true"
+       data-hide-cover="false"
+       data-show-facepile="true">
+  </div>
+</section>
+
+
+  <!-- Menu -->
+  <section id="menu" class="section bg-neutral-900/60 py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="mb-6 text-3xl font-bold">Drink
+      </h2>
+      <div class="grid gap-8 md:grid-cols-2">
+        <div>
+          <h3 class="mb-2 text-xl font-semibold">ドリンク</h3>
+          <ul class="list-disc pl-5 text-neutral-300 columns-1 sm:columns-2 [column-gap:1.5rem]">
+  <li class="break-inside-avoid">ブランデー</li>
+  <li class="break-inside-avoid">テキーラ</li>
+  <li class="break-inside-avoid">ウイスキー</li>
+  <li class="break-inside-avoid">ワイン</li>
+  <li class="break-inside-avoid">シャンパン</li>
+  <li class="break-inside-avoid">ビール、焼酎</li>
+  <li class="break-inside-avoid">ソフトドリンク</li>
+</ul>
+
+        </div>
+      <p class="mt-4 text-xs text-neutral-400">※各ドリンクに様々な種類がございます。</p>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="section mx-auto max-w-6xl px-4 py-16">
+    <h2 class="mb-6 text-3xl font-bold">Gallery/ ギャラリー</h2>
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <img class="h-56 w-full rounded-xl object-cover" src="img/kanban.jpg" alt="看板"/>
+      <img class="h-56 w-full rounded-xl object-cover" src="img/tennai.jpg" alt="店内"/>
+      <img class="h-56 w-full rounded-xl object-cover" src="img/dance.jpg" alt="ダンス"/>
+    </div>
+  </section>
+
+  <!-- Access -->
+  <section id="access" class="section bg-neutral-900/60 py-16">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="mb-6 text-3xl font-bold">Access / アクセス</h2>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <!-- 左：住所・電話の下に omise.jpg -->
+      <div>
+        <p class="text-neutral-300">
+          〒660-0883 兵庫県尼崎市神田北通2-22-4 10階<br>
+          阪神・尼崎駅より徒歩6分
+        </p>
+        <div class="mt-3 text-neutral-300">
+          <p>営業時間：20:00〜翌1:00（年中無休）</p>
+          <p>電話：
+            <a class="hover:underline" href="tel:07022862224">070-2286-2224</a>
+          </p>
+        </div>
+
+        <!-- ★ ここにお店写真（電話番号の下）-->
+        <img src="img/omise.jpg" alt="外観・入口の目印"
+             class="mt-4 w-full h-auto rounded-2xl object-contain">
+      </div>
+
+      <!-- 右：マップを中央に配置（縦横センター）-->
+      <div class="md:min-h-[420px] flex items-center justify-center">
+        <div class="w-full max-w-[520px] aspect-[4/3] overflow-hidden rounded-2xl">
+          <iframe
+            title="Google Map"
+            src="https://www.google.com/maps?q=%E3%80%92660-0883%20%E5%85%B5%E5%BA%AB%E7%9C%8C%E5%B0%BC%E5%B4%8E%E5%B8%82%E7%A5%9E%E7%94%B0%E5%8C%97%E9%80%9A2-22-4&hl=ja&z=18&output=embed"
+            class="h-full w-full border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 予約フォーム（例） -->
+  <!-- 予約セクション（例） -->
+<section id="reserve" class="section mx-auto max-w-6xl px-4 py-16 scroll-mt-28">
+  <!-- フォーム … -->
+</section>
+
+<!-- 予約フォーム -->
+<form id="reserveForm"
+      action="/reserve.php" method="POST"
+      class="form-compact grid gap-3 md:grid-cols-2">  <!-- ← form-compact を追加 / gapを3に -->
+
+  <div>
+    <label class="block text-sm mb-0.5">お名前 *</label>  <!-- mb-1 → mb-0.5 -->
+    <input name="name" required
+           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5"> <!-- py-2 → py-1.5 -->
+  </div>
+
+  <div>
+    <label class="block text-sm mb-0.5">電話番号 *</label>
+    <input name="tel" type="tel" required pattern="^[0-9\\-+]{9,20}$"
+           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
+  </div>
+
+  <div class="md:col-span-2">
+    <label class="block text-sm mb-0.5">メールアドレス *</label>
+    <input name="email" type="email" required
+           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
+  </div>
+
+  <div>
+    <label class="block text-sm mb-0.5">来店日 *</label>
+    <input name="date" type="date" required
+           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
+  </div>
+
+  <div>
+   <label class="block text-sm mb-0.5">来店時間 *</label>
+<select name="time" id="timeSelect" required
+        class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
+  <!-- JSで20:00〜翌1:00を自動生成します（下の#2参照） -->
+</select>
+
+  </div>
+
+  <div>
+    <label class="block text-sm mb-0.5">人数</label>
+    <input name="guests" type="number" min="1" max="30" value="1"
+           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
+  </div>
+
+  <div class="md:col-span-2">
+    <label class="block text-sm mb-0.5">ご要望</label>
+    <textarea name="msg" rows="3"
+              class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-2"></textarea> <!-- rows 4→3 -->
+  </div>
+
+  <!-- スパム対策 -->
+  <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off">
+
+  <div class="md:col-span-2">
+    <button type="submit"
+            class="btn-primary rounded-xl px-5 py-2.5 font-semibold">予約を送信</button> <!-- 少し小さめ -->
+  </div>
+</form>
+
+
+  
+  <!-- Payment Logos -->
+  <section class="section bg-neutral-900/60 py-10">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="pay-strip">
+      <span class="pay-title">ご利用可能なクレジットカード：</span>
+      <!-- ← 幅・高さ属性は外して、クラスで高さだけ指定 -->
+      <img class="h-7 sm:h-9 lg:h-11 w-auto"
+           src="img/cards/card_5brand.png" alt="5card">
+    </div>
+  </div>
+</section>
+
+  <footer class="border-t border-white/10 bg-neutral-950 py-10">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 md:flex-row">
+      <p class="text-sm text-neutral-400">© <span id="year"></span> LUNA Lounge. All rights reserved.</p>
+      <div class="flex items-center gap-4 text-sm text-neutral-400">
+       <a class="hover:text-white" href="privacy.html">プライバシーポリシー</a>
+       <a class="hover:text-white" href="jobs.html">求人情報</a>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+<!-- 右上ハンバーガー -->
+<button id="navHamburger"
+  class="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 hover:bg-white/20 md:hidden"
+  aria-controls="offcanvas" aria-expanded="false" aria-label="メニューを開く">
+  <span class="sr-only">メニュー</span>
+  <span class="bar bar-1 block h-0.5 w-6 bg-white transition-all duration-300"></span>
+  <span class="bar bar-2 mt-1.5 block h-0.5 w-6 bg-white transition-all duration-300"></span>
+  <span class="bar bar-3 mt-1.5 block h-0.5 w-6 bg-white transition-all duration-300"></span>
+</button>
+
+
+
