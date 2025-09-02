@@ -67,19 +67,26 @@
 
     <!-- PCナビ -->
     <nav class="hidden items-center gap-6 md:flex">
-      <a class="hover:text-[var(--brand-2)]" href="#concept">Concept</a>
-      <a class="hover:text-[var(--brand-2)]" href="#system">System</a>
-      <a class="hover:text-[var(--brand-2)]" href="#cast">SNS</a>
-      <a class="hover:text-[var(--brand-2)]" href="#menu">Menu</a>
-      <a class="hover:text-[var(--brand-2)]" href="#gallery">Gallery</a>
-      <a class="hover:text-[var(--brand-2)]" href="#access">Access</a>
-      <a class="rounded-xl btn-primary px-4 py-2 font-semibold hover:opacity-95" href="#reserve">Webご予約</a>
-      <a href="tel:07022862224"
+  <a class="hover:text-[var(--brand-2)]" href="#concept">Concept</a>
+  <a class="hover:text-[var(--brand-2)]" href="#system">System</a>
+  <a class="hover:text-[var(--brand-2)]" href="#cast">SNS</a>
+  <a class="hover:text-[var(--brand-2)]" href="#menu">Menu</a>
+  <a class="hover:text-[var(--brand-2)]" href="#gallery">Gallery</a>
+  <a class="hover:text-[var(--brand-2)]" href="#access">Access</a>
+
+  <!-- ▼ここを単体ページURLに変更（別タブで開く） -->
+  <a
+    class="rounded-xl btn-primary px-4 py-2 font-semibold hover:opacity-95"
+    href="https://docs.google.com/forms/d/e/1FAIpQLSepSf0vB5KycKuwDjRgX2lVBBVozr65XsLU6eICIuQ-qlb7jw/viewform"
+    target="_blank" rel="noopener"
+  >Webご予約</a>
+
+  <a href="tel:07022862224"
      class="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 font-semibold ring-1 ring-white/15 hover:bg-white/20"
      aria-label="電話で予約 070-2286-2224">
     <span aria-hidden="true">📞</span> 電話で予約
   </a>
-    </nav>
+</nav>
 
     <!-- ハンバーガー（type="button"が重要） -->
     <button id="navOpen" type="button" class="md:hidden" aria-label="メニュー">
@@ -99,7 +106,11 @@
       <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#menu">Menu</a>
       <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#gallery">Gallery</a>
       <a class="rounded-lg px-2 py-2 hover:bg-neutral-800" href="#access">Access</a>
-      <a class="rounded-lg btn-primary px-2 py-2 font-semibold hover:opacity-95" href="#reserve">Webご予約</a>
+      <a
+  class="rounded-lg btn-primary px-2 py-2 font-semibold hover:opacity-95"
+  href="https://docs.google.com/forms/d/e/1FAIpQLSepSf0vB5KycKuwDjRgX2lVBBVozr65XsLU6eICIuQ-qlb7jw/viewform"
+  target="_blank" rel="noopener"
+>Webご予約</a>
       <a href="tel:07022862224" class="rounded-lg px-2 py-2 hover:bg-neutral-800 flex items-center gap-2"
          aria-label="電話で予約 070-2286-2224">📞 電話で予約（070-2286-2224）</a>
     </div>
@@ -173,7 +184,7 @@
   <p class="mb-4 text-neutral-300">最新の情報、イベントはこちらで表示されます。</p>
   <!-- 幅は親の幅に自動フィット（data-adapt-container-width=true） -->
   <div class="fb-page"
-       data-href="https://www.facebook.com/facebook"
+       data-href="https://www.facebook.com/luna.lounge.26257"
        data-tabs="timeline"
        data-width=""
        data-height=""
@@ -265,63 +276,13 @@
 </section>
 
 <!-- 予約フォーム -->
-<form id="reserveForm"
-      action="/reserve.php" method="POST"
-      class="form-compact grid gap-3 md:grid-cols-2">  <!-- ← form-compact を追加 / gapを3に -->
 
-  <div>
-    <label class="block text-sm mb-0.5">お名前 *</label>  <!-- mb-1 → mb-0.5 -->
-    <input name="name" required
-           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5"> <!-- py-2 → py-1.5 -->
-  </div>
 
-  <div>
-    <label class="block text-sm mb-0.5">電話番号 *</label>
-    <input name="tel" type="tel" required pattern="^[0-9\\-+]{9,20}$"
-           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
-  </div>
+<a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSepSf0vB5KycKuwDjRgX2lVBBVozr65XsLU6eICIuQ-qlb7jw/viewform"
+   target="_blank" rel="noopener">メールで予約する</a>
 
-  <div class="md:col-span-2">
-    <label class="block text-sm mb-0.5">メールアドレス *</label>
-    <input name="email" type="email" required
-           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
-  </div>
-
-  <div>
-    <label class="block text-sm mb-0.5">来店日 *</label>
-    <input name="date" type="date" required
-           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
-  </div>
-
-  <div>
-   <label class="block text-sm mb-0.5">来店時間 *</label>
-<select name="time" id="timeSelect" required
-        class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
-  <!-- JSで20:00〜翌1:00を自動生成します（下の#2参照） -->
-</select>
-
-  </div>
-
-  <div>
-    <label class="block text-sm mb-0.5">人数</label>
-    <input name="guests" type="number" min="1" max="30" value="1"
-           class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-1.5">
-  </div>
-
-  <div class="md:col-span-2">
-    <label class="block text-sm mb-0.5">ご要望</label>
-    <textarea name="msg" rows="3"
-              class="w-full rounded-xl bg-white/5 border border-white/10 px-3 py-2"></textarea> <!-- rows 4→3 -->
-  </div>
-
-  <!-- スパム対策 -->
-  <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off">
-
-  <div class="md:col-span-2">
-    <button type="submit"
-            class="btn-primary rounded-xl px-5 py-2.5 font-semibold">予約を送信</button> <!-- 少し小さめ -->
-  </div>
-</form>
+<!-- 同タブで開くなら（target属性を外すだけ） -->
+<!-- <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSepSf0vB5KycKuwDjRgX2lVBBVozr65XsLU6eICIuQ-qlb7jw/viewform">メールで予約する</a> -->
 
 
   

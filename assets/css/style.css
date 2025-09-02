@@ -120,3 +120,19 @@ header a[href="#reserve"],
   max-width: 800px;   /* 好みで 500–900px */
   margin-inline: auto;
 }
+  :root{
+    --btn-purple:        #7C3AED; /* 基本（紫） */
+    --btn-purple-hover:  #6D28D9; /* ホバーで少し濃く */
+    --btn-purple-active: #5B21B6; /* クリック中 */
+    --btn-purple-ring:   #C4B5FD; /* フォーカス枠 */
+  }
+
+  .btn{
+    display:inline-block; padding:12px 20px; border-radius:9999px;
+    background: var(--btn-purple);
+    color:#fff; text-decoration:none; font-weight:600;
+    transition: background .15s ease, transform .05s ease;
+  }
+  .btn:hover{ background: var(--btn-purple-hover); }
+  .btn:active{ background: var(--btn-purple-active); transform: translateY(1px); }
+  .btn:focus-visible{ outline:3px solid var(--btn-purple-ring); outline-offset:2px; }
